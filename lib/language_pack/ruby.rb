@@ -2,6 +2,8 @@ require "tmpdir"
 require "rubygems"
 require "language_pack"
 require "language_pack/base"
+require "cgi"
+require "uri"
 
 # base Ruby Language Pack. This is for any base ruby app.
 class LanguagePack::Ruby < LanguagePack::Base
@@ -498,7 +500,7 @@ adapter = "postgresql" if adapter == "postgres"
 
 database = (uri.path || "").split("/")[1]
 
-username = uri.user
+username = CGI.unescape(uri.user)
 password = uri.password
 
 host = uri.host
